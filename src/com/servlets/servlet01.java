@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/add")
+//@WebServlet("/add")
 public class servlet01 extends HttpServlet {
 	
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
