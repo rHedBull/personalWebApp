@@ -8,6 +8,11 @@ import java.sql.Statement;
 
 public class userDAO extends DBservlet{
 
+	/**
+	 * returns a certain full User Object from database indentified by userID
+	 * @param id, the userId by which he can be found in the DB
+	 * @return the User Object
+	 */
 	public User getUser (int id) {
 		
 		int Id = id;
@@ -28,12 +33,18 @@ public class userDAO extends DBservlet{
 			System.out.println("Failed to execute sql statement. ResultSet rs was not filled");
 		}
 		rs.next();
-		// code works till here ------------------------------------------------------------------------------------------
 		
 		//extract values from rs and assign to userDAO object;
-		//String lastName = null; // = rs.getString("columnName");
-		//u.setLastName(lastName);
-		// this for every var of user Object
+		String lastName = rs.getString("lastName");
+		u.setLastName(lastName);
+		String name = rs.getString("name");
+		u.setName(name);
+		int birthDate = rs.getInt("birthDate");
+		u.setBirthDate(birthDate);
+		String eMail = rs.getString("eMail");
+		u.seteMail(eMail);
+		
+		// for testing: u.print();
 		
 		if(u != null) {
 			System.out.println("returned userDAO Object is not null");
@@ -47,26 +58,39 @@ public class userDAO extends DBservlet{
 		
 	}
 	
-	
 	/**
-	 * returns a single String value of a certain column in the ResultSet
-	 * @param columnName , the name of the column from which the String will be returned
-	 * @param RS the ResultSet in which the columnValues are stored
-	 * @return columnValue in columName as a String
+	 * updates a certain int Value of a user in DB
+	 * @param userID to identify the user which has to be updated
+	 * @param columnIndex the index of the column where you want to update a value
+	 * @param columnValue the actual int value which should be inserted in the use in DB
 	 */
-	public String getString(String columnName, ResultSet RS) {
-		String cn = columnName;
-		String columnValue = null;
-		ResultSet rs = RS;
+	public void updateUserInt(int userID, String columnIndex, int columnValue ) {
+		Connection con = getDBConnection(url, userName, password);
 		
-		// assuming the rs.next(operation has already been executed);
+		String updateStatement = "dkfsfj";
+		
+		
 		try {
-			columnValue = rs.getString("cn");
+			Statement st = con.createStatement();
+			System.out.println("Updated user information");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Failed to update user information");
 		}
+				
 		
-		return columnValue;
+		
 	}
+	
+	/** updates a certain String Value of a user in DB
+	 * @param userID to identify the user which has to be updated
+	 * @param columnIndex the index of the column where you want to update a value
+	 * @param columnValue the actual String value which should be inserted in the use in DB
+	 */
+	public void updateUserString(int userID, String columnIndex, String columnValue) {
+		
+	}
+	
+	
 }

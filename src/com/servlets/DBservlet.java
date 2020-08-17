@@ -36,6 +36,8 @@ public class DBservlet extends HttpServlet{
 		User u = new User();
 		u = getUserFromDB(1); // test see how it works
 		
+		String lastName = u.getLastName();
+		out.println(lastName);
 		out.println("process has been executed");
 	}
 	
