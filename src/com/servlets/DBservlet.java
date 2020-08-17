@@ -17,7 +17,7 @@ import org.springframework.http.HttpRequest;
 public class DBservlet extends HttpServlet{
 	
 	/** The URL to the database file. */
-	public final String url = "jdbc:sqlite:user.db";
+	public final String url = "jdbc:sqlite:C:/Projects Data/gitData/personalWebApp/personalWebApp/DB/userDB.db";
 	
 	/** The used user name to interact with the database. */
 	public final String userName = "root";
@@ -32,28 +32,39 @@ public class DBservlet extends HttpServlet{
 		PrintWriter out = res.getWriter();
 		out.print(debugServletCalled);
 		
-		Connection c = getDBConnection(url, userName, password);
-		if (c != null) {
-			System.out.println("connection established !!");
-			out.print("connection established !!!");
-		} else{
-			out.print("connection was tried to establish but did not return any connection object");
-		}
+		//Connection c = getDBConnection(url, userName, password); this was for testing the getDBConnection method which works !!
+		User u = new User();
+		u = getUserFromDB(1); // test see how it works
 		
+		out.println("process has been executed");
 	}
 	
+	/**
+	 * connects to database
+	 * @param URL the path to the DB
+	 * @param uName username of DB
+	 * @param p password of DB
+	 * @return , Connection object
+	 */
 	public Connection getDBConnection(String URL, String uName, String p){
 		Connection con = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection(url, userName, password);
 			
+			if (con != null) {
+				System.out.println("connection established !!");
+			} else{
+				System.out.println("connection was tried to establish but did not return any connection object");
+			}
 			return con;
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("Failed to connect to database");
 			return con;
 		}catch(SQLException e) {
 			e.printStackTrace();
+			System.out.println("Failed to connect to database");
 			return con;
 		}
 	}
@@ -82,7 +93,12 @@ public class DBservlet extends HttpServlet{
 		
 	}
 	
-	public User getUserfromDB(int id) {
+	/**
+	 * extracts one distinct User Object from DB
+	 * @param id the id of the User from which the method should extract the User Object
+	 * @return User object with @param id in DB
+	 */
+	public User getUserFromDB(int id) {
 		int Id = id;
 		
 		userDAO uDAO = new userDAO(); // create DAO object for user to acces DB
@@ -90,6 +106,9 @@ public class DBservlet extends HttpServlet{
 		u = uDAO.getUser(Id); // assign the extracted userObject from the DB by the userDAO object to the user Object
 		return u;
 	}
+	
+	
+	
 	
 	
 	

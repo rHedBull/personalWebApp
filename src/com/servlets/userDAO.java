@@ -1,5 +1,6 @@
 package com.servlets;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,8 +27,13 @@ public class userDAO extends DBservlet{
 		}else {
 			System.out.println("Failed to execute sql statement. ResultSet rs was not filled");
 		}
+		rs.next();
+		// code works till here ------------------------------------------------------------------------------------------
 		
 		//extract values from rs and assign to userDAO object;
+		//String lastName = null; // = rs.getString("columnName");
+		//u.setLastName(lastName);
+		// this for every var of user Object
 		
 		if(u != null) {
 			System.out.println("returned userDAO Object is not null");
@@ -39,5 +45,28 @@ public class userDAO extends DBservlet{
 			return u;
 		}
 		
+	}
+	
+	
+	/**
+	 * returns a single String value of a certain column in the ResultSet
+	 * @param columnName , the name of the column from which the String will be returned
+	 * @param RS the ResultSet in which the columnValues are stored
+	 * @return columnValue in columName as a String
+	 */
+	public String getString(String columnName, ResultSet RS) {
+		String cn = columnName;
+		String columnValue = null;
+		ResultSet rs = RS;
+		
+		// assuming the rs.next(operation has already been executed);
+		try {
+			columnValue = rs.getString("cn");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return columnValue;
 	}
 }
