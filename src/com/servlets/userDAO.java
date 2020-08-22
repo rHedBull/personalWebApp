@@ -43,8 +43,10 @@ public class userDAO extends DBservlet{
 		u.setBirthDate(birthDate);
 		String eMail = rs.getString("eMail");
 		u.seteMail(eMail);
+		String password = rs.getString("password");
+		u.setPassword(password);
 		
-		// for testing: u.print();
+		// u.print();
 		
 		if(u != null) {
 			System.out.println("returned userDAO Object is not null");
@@ -79,8 +81,6 @@ public class userDAO extends DBservlet{
 			System.out.println("Failed to update user information");
 		}
 				
-		
-		
 	}
 	
 	/** updates a certain String Value of a user in DB
@@ -90,6 +90,18 @@ public class userDAO extends DBservlet{
 	 */
 	public void updateUserString(int userID, String columnIndex, String columnValue) {
 		
+	}
+	
+	public void addNewUser(User newUser) {
+		 User u = newUser;
+		 
+		 String userLastName = u.getLastName();
+		 String userName = u.getName();
+		 int userBirthDate = u.getBirthDate();
+		 String userEMail = u.geteMail();
+		 String userPassword = u.getPassword();
+		 
+		 
 	}
 	
 	

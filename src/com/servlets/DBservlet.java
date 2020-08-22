@@ -32,12 +32,11 @@ public class DBservlet extends HttpServlet{
 		PrintWriter out = res.getWriter();
 		out.print(debugServletCalled);
 		
-		//Connection c = getDBConnection(url, userName, password); this was for testing the getDBConnection method which works !!
 		User u = new User();
-		u = getUserFromDB(1); // test see how it works
+		u = getUserFromDB(2);
 		
-		String lastName = u.getLastName();
-		out.println(lastName);
+		String password = u.getPassword();
+		out.println(password);
 		out.println("process has been executed");
 	}
 	
@@ -78,12 +77,12 @@ public class DBservlet extends HttpServlet{
 	 * Added to that the method will return {@code false} if
 	 * the storing process fails and {@code true} if everything goes fine.
 	 * </p>
-	 * @param m the message to store
-	 * @return whether the storing process succeeded
+	 * @param newUser Object to store
 	 */
-	public boolean addUserToDB(userDAO d) {
+	public void addUserToDB(User newUser) {
 		//d.getLocalData().setId(23);
-		return true;
+		
+		
 	}
 	
 	/**
@@ -99,6 +98,7 @@ public class DBservlet extends HttpServlet{
 	 * extracts one distinct User Object from DB
 	 * @param id the id of the User from which the method should extract the User Object
 	 * @return User object with @param id in DB
+	 * works
 	 */
 	public User getUserFromDB(int id) {
 		int Id = id;

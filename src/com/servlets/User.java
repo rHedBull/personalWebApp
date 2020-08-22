@@ -6,7 +6,8 @@ public class User {
 		private String lastName;
 		private String name;
 		private int birthDate;
-		private String eMail;		
+		private String eMail;	
+		private String password;
 		
 		public int getUserID() {
 			return userID;
@@ -38,15 +39,20 @@ public class User {
 		public void seteMail(String eMail) {
 			this.eMail = eMail;
 		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String p) {
+			this.password = p;
+		}
 		
 		public void print() {
 			
 			String UserString;
 			String UserHeader;
 			
-			
-			UserHeader = "userID | lastName | name | birthDate | eMail | ";
-			UserString = this.getUserID() + " | " + this.getLastName() + " | " + this.getName() + " | " + this.getBirthDate() + " | " + this.geteMail() + " | ";
+			UserHeader = "userID | lastName | name | birthDate | eMail | password | ";
+			UserString = this.getUserID() + " | " + this.getLastName() + " | " + this.getName() + " | " + this.getBirthDate() + " | " + this.geteMail() + " | " + this.getPassword() + " | ";
 			System.out.println(UserHeader);
 			System.out.println(UserString);
 			
