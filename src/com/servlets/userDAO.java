@@ -2,6 +2,7 @@ package com.servlets;
 
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -92,15 +93,42 @@ public class userDAO extends DBservlet{
 		
 	}
 	
+	/** 
+	 * add a new user object to users Db
+	 * @param newUser the user object that should be stored
+	 * throws error when password of user is empty
+	 * throw exception when process fails
+	 */
 	public void addNewUser(User newUser) {
 		 User u = newUser;
 		 
 		 String userLastName = u.getLastName();
-		 String userName = u.getName();
+		 String uName = u.getName();
 		 int userBirthDate = u.getBirthDate();
 		 String userEMail = u.geteMail();
 		 String userPassword = u.getPassword();
 		 
+		 if (userPassword == null) { // user needs to provide password !!!
+			 System.out.println("user: " + u.getUserID() + " did not provide a password!!" );
+			 System.out.println("failed to insert User into DB");
+			 return;
+		 }
+		 
+		 Connection con = getDBConnection(url, userName, password);
+		 
+		 String query = (String) "Insert into users(lastName,name,birthDate,eMail,password) "
+			 		+ "values(\"" + userLastName + "\", \"" + uName + "\", " + userBirthDate + ", \"" + userEMail + "\", \"" + userPassword + "\")";
+		 PreparedStatement pst;
+		 try {
+			pst = con.prepareStatement(query);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Failed to execute insert query");
+			System.out.println("failed to insert User into DB");
+			e.printStackTrace();
+			
+		}
 		 
 	}
 	

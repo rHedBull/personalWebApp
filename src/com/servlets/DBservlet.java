@@ -33,10 +33,16 @@ public class DBservlet extends HttpServlet{
 		out.print(debugServletCalled);
 		
 		User u = new User();
-		u = getUserFromDB(2);
+		// u = getUserFromDB(2);
 		
-		String password = u.getPassword();
-		out.println(password);
+		u.setLastName("TestLastName");
+		u.seteMail("test@email03.com"); // email needs to be allways different !!!
+		u.setPassword("p");
+		
+		addUserToDB(u);
+		
+		//String password = u.getPassword();
+		//out.println(password);
 		out.println("process has been executed");
 	}
 	
@@ -71,18 +77,14 @@ public class DBservlet extends HttpServlet{
 	}
 	
 	/**
-	 * Stores a message in the chat database. By doing that the message's id is set to something not equal to {@code -1}.
-	 * If the message's id stays {@code -1}, the message couldn't get stored. 
-	 * <p>
-	 * Added to that the method will return {@code false} if
-	 * the storing process fails and {@code true} if everything goes fine.
-	 * </p>
+	 *add new user object to users DB
 	 * @param newUser Object to store
 	 */
 	public void addUserToDB(User newUser) {
-		//d.getLocalData().setId(23);
 		
-		
+		User u = newUser;
+		userDAO  uDAO = new userDAO();
+		uDAO.addNewUser(u);
 	}
 	
 	/**
