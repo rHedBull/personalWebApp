@@ -15,15 +15,6 @@ import org.springframework.http.HttpRequest;
 
 @WebServlet("/db")
 public class DBservlet extends HttpServlet{
-	
-	/** The URL to the database file. */
-	public final String url = "jdbc:sqlite:C:/Projects Data/gitData/personalWebApp/personalWebApp/DB/userDB.db";
-	
-	/** The used user name to interact with the database. */
-	public final String userName = "root";
-	
-	/** The used password to interact with the database. */
-	public final String password = "root";
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws IOException  {
 		String debugServletCalled = "db Servelt called!";
@@ -33,47 +24,18 @@ public class DBservlet extends HttpServlet{
 		out.print(debugServletCalled);
 		
 		User u = new User();
-		// u = getUserFromDB(2);
+		u = getUserFromDB(2);
 		
+		/**
 		u.setLastName("TestLastName");
-		u.seteMail("test@email03.com"); // email needs to be allways different !!!
+		u.seteMail("test@email04.com"); // email needs to be always different !!!
 		u.setPassword("p");
 		
-		addUserToDB(u);
+		addUserToDB(u); */
 		
-		//String password = u.getPassword();
-		//out.println(password);
+		String password = u.getPassword();
+		out.println(password);
 		out.println("process has been executed");
-	}
-	
-	/**
-	 * connects to database
-	 * @param URL the path to the DB
-	 * @param uName username of DB
-	 * @param p password of DB
-	 * @return , Connection object
-	 */
-	public Connection getDBConnection(String URL, String uName, String p){
-		Connection con = null;
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection(url, userName, password);
-			
-			if (con != null) {
-				System.out.println("connection established !!");
-			} else{
-				System.out.println("connection was tried to establish but did not return any connection object");
-			}
-			return con;
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Failed to connect to database");
-			return con;
-		}catch(SQLException e) {
-			e.printStackTrace();
-			System.out.println("Failed to connect to database");
-			return con;
-		}
 	}
 	
 	/**
