@@ -24,20 +24,21 @@ public class DBservlet extends HttpServlet{
 		out.print(debugServletCalled);
 		
 		User u = new User();
-		u = getUserFromDB(2);
+		//u = getUserFromDB(2);
 		
 		/**
 		u.setLastName("TestLastName");
 		u.seteMail("test@email04.com"); // email needs to be always different !!!
 		u.setPassword("p");
+		 */
+		//addUserToDB(u); 
 		
-		addUserToDB(u); */
-		
-		String password = u.getPassword();
-		out.println(password);
+		//String password = u.getPassword();
+		//out.println(password);
+		deleteUser(4);
 		out.println("process has been executed");
 	}
-	
+
 	/**
 	 *add new user object to users DB
 	 * @param newUser Object to store
@@ -73,9 +74,14 @@ public class DBservlet extends HttpServlet{
 		return u;
 	}
 	
-	
-	
-	
-	
-	
+	/**
+	 * deletes a user from Database
+	 * @param userID the userID of the user that will be delted
+	 */
+	public void deleteUser(int uID) {
+		int userID = uID;
+		userDAO  uDAO = new userDAO();
+		uDAO.deleteUserObject(userID);
+	}
+		
 }

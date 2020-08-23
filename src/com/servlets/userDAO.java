@@ -100,6 +100,7 @@ public class userDAO extends DBservlet{
 		 try {
 			pst = con.prepareStatement(query);
 			pst.executeUpdate();
+			System.out.println("Added new user to the userDB.db database");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Failed to execute insert query");
@@ -146,22 +147,24 @@ public class userDAO extends DBservlet{
 	 * throws error when user is not existing
 	 * throw exception when process fails
 	 */
-	public void deleteUser(int userID) {
+	public void deleteUserObject(int userID) {
+		
+		int uID = userID;
 		 
 		 Connection con = getDBConnection(url, userName, password);
 		 
-		 /**String query = (String) "Insert into users(lastName,name,birthDate,eMail,password) "
-			 		+ "values(\"" + userLastName + "\", \"" + uName + "\", " + userBirthDate + ", \"" + userEMail + "\", \"" + userPassword + "\")";
+		 String query = (String) "Delete from users where userID = " + uID;
 		 PreparedStatement pst;
 		 try {
 			pst = con.prepareStatement(query);
 			pst.executeUpdate();
+			System.out.println("Deleted user with userID: " + uID + " from usersDB.db");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Failed to execute insert query");
-			System.out.println("failed to insert User into DB");
+			System.out.println("Failed to execute delete query");
 			e.printStackTrace();
-		} */
+			// add exception when the user which is supposed to be deleted does not exist
+		} 
 	}
 	
 	
