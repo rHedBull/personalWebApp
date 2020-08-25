@@ -35,15 +35,37 @@ public class DBservlet extends HttpServlet{
 		
 		//String password = u.getPassword();
 		//out.println(password);
-		deleteUser(4);
+		try {
+			deleteUser(6);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/**
+		u.setUserID(2);
+		u.setLastName("Davi");
+		u.setName("Ken");
+		u.setBirthDate(9);
+		u.seteMail("theDavises@test.com");
+		u.setPassword("DAvisPassword");
+		
+		try {
+			updateUser(u);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
+		
 		out.println("process has been executed");
 	}
 
 	/**
 	 *add new user object to users DB
 	 * @param newUser Object to store
+	 * @throws Exception 
 	 */
-	public void addUserToDB(User newUser) {
+	public void addUserToDB(User newUser) throws Exception {
 		
 		User u = newUser;
 		userDAO  uDAO = new userDAO();
@@ -54,8 +76,14 @@ public class DBservlet extends HttpServlet{
 	 * Updates a message in the chat database. The message has
 	 * to be already stored in the database to get updated successfully.
 	 * @param updatedMessage
+	 * @throws Exception 
 	 */
-	public void updateUser(userDAO d) {
+	public void updateUser(User u) throws Exception {
+		
+		User updatedUser = u;
+		int uID= updatedUser.getUserID();
+		userDAO  uDAO = new userDAO();
+		uDAO.updateUser(uID, updatedUser);
 		
 	}
 	
@@ -64,8 +92,9 @@ public class DBservlet extends HttpServlet{
 	 * @param id the id of the User from which the method should extract the User Object
 	 * @return User object with @param id in DB
 	 * works
+	 * @throws Exception 
 	 */
-	public User getUserFromDB(int id) {
+	public User getUserFromDB(int id) throws Exception {
 		int Id = id;
 		
 		userDAO uDAO = new userDAO(); // create DAO object for user to acces DB
@@ -77,8 +106,9 @@ public class DBservlet extends HttpServlet{
 	/**
 	 * deletes a user from Database
 	 * @param userID the userID of the user that will be delted
+	 * @throws Exception 
 	 */
-	public void deleteUser(int uID) {
+	public void deleteUser(int uID) throws Exception {
 		int userID = uID;
 		userDAO  uDAO = new userDAO();
 		uDAO.deleteUserObject(userID);
