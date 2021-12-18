@@ -1,0 +1,15 @@
+Insert into ChatHistory(messageId,message,sendingID,status,timestamp_sec) values(9,"neue Zeitrechnung", 10,0, strftime('%s','now')); // messageID not needed!!!
+Insert into ChatHistory(message,sendingID,receivingID,status,timestamp_sec) 
+values("neue Zeitrechnung", 9, 10, 0, 100);
+
+Delete from ChatHistory Where messageId = 8;
+
+Select * from ChatHistory
+
+https://github.com/jgilfelt/android-sqlite-asset-helper
+
+
+
+my personal web App:
+
+Insert into users(lastName,name,birthDate,eMail) values("Mustermann", "Hermann", 1968643592, "mustermann@email.com"); don't forget password!!!
